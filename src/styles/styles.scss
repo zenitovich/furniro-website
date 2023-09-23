@@ -1,0 +1,35 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins');
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100px;
+  padding: 0 5%;
+  &__list {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: Poppins;
+    font-size: 16px;
+    font-weight: bold;
+    color: rgba(0, 0, 0, 1);
+    :last-child {
+      padding-right: 0;
+    }
+    &--item {
+      padding-right: 30px;
+    }
+  }
+  &__icons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    :last-child {
+      padding-right: 0;
+    }
+    &--item {
+      padding-right: 20px;
+    }
+  }
+}
