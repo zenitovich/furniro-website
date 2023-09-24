@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins');
 
 .header {
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -31,5 +32,70 @@
     &--item {
       padding-right: 20px;
     }
+  }
+}
+
+.footer {
+  width: 100%;
+  height: 505px;
+  font-family: Poppins;
+  font-size: 16px;
+  background-color: floralwhite;
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+  align-items: center;
+  border-top: 2px solid rgba(159, 159, 159, 1);
+  &__menu {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    &--info {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-direction: column;
+      font-size: 24px;
+      font-weight: 700;
+      &-description {
+        color: rgba(159, 159, 159, 1);
+        font-size: 16px;
+        font-weight: 400;
+        margin-top: 30px;
+      }
+    }
+    &--links, &--help, &--newsletter {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-direction: column;
+      color: rgba(159, 159, 159, 1);
+      &-item, &-email {
+        cursor: pointer;
+        margin-top: 30px;
+        color: rgba(0, 0, 0, 1);
+      }
+      &-btn, &-email {
+        border: none;
+        background-color: floralwhite;
+        text-decoration: underline;
+        font-weight: bold;
+        cursor: pointer;
+      }
+      &-btn {
+        margin-top: 10px;
+      }
+      &-email {
+        font-weight: normal;
+      }
+    }
+  }
+  &__info {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding-top: 50px;
+    border-top: 2px solid rgba(159, 159, 159, 1)
   }
 }
