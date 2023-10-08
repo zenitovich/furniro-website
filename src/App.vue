@@ -1,16 +1,20 @@
 <template>
   <div id="app" class="app-view">
-      <HomePage></HomePage>
+      <component :is="layout">
+          <router-view></router-view>
+      </component>
   </div>
 </template>
 
 <script>
-import HomePage from "@/components/HomePage.vue";
-
 export default {
   name: 'App',
   components: {
-    HomePage,
+  },
+  computed: {
+    layout() {
+      return this.$route?.meta?.layout || "DefaultLayout"
+    },
   }
 }
 </script>
