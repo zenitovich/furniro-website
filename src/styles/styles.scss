@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins');
-
+@import "shop";
 .header-component {
   overflow: hidden;
 }
@@ -51,7 +51,6 @@
 }
 
 .footer {
-  background-color: floralwhite;
   padding: 0 5%;
   max-width: 100%;
   font-family: Poppins;

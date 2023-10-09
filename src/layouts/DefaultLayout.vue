@@ -10,9 +10,9 @@
                   <div class="header__list--item">Contact</div>
               </div>
               <div class="header__icons">
-                  <div class="header__icons--item"><img src="../assets/icons/profile.svg" alt="profile"/></div>
+<!--                  <div class="header__icons&#45;&#45;item"><img src="../assets/icons/profile.svg" alt="profile"/></div>-->
                   <div class="header__icons--item"><img src="../assets/icons/search.svg" alt="search"/></div>
-                  <div class="header__icons--item"><img src="../assets/icons/likes.svg" alt="likes"/></div>
+<!--                  <div class="header__icons&#45;&#45;item"><img src="../assets/icons/likes.svg" alt="likes"/></div>-->
                   <div class="header__icons--item"><img src="../assets/icons/cart.svg" alt="cart"/></div>
               </div>
           </div>
