@@ -7,8 +7,10 @@
               <div class="shop-header__filter--results">32 results</div>
           </div>
           <div class="shop-carts">
-              {{getShopCart()}}
-              <shop-cart></shop-cart>
+              <shop-cart
+                      v-for="product in this.$store.state.products"
+                      :key="product.id">
+              </shop-cart>
           </div>
           <div class="shop-header__sort">
               <div class="shop-header__sort--text"> Short by</div>
@@ -28,6 +30,7 @@
 
 <script>
 import ShopCart from "@/components/Shop-cart.vue";
+import {mapActions} from "vuex";
 
 export default {
   name: "shop-page",
@@ -35,22 +38,15 @@ export default {
 
   data() {
     return {
-      ArrOfCarts: [],
     }
   },
-
-  //or computed if we not use data keys
   methods: {
-    getShopCart() {
-      fetch('http://localhost:4000/items/')
-        .then((response) => {
-          return response.json();
-        })
-        .then((items) => {
-          this.ArrOfCarts = JSON.stringify(items)
-          console.log(JSON.stringify(items))
-        });
-    }
+    ...mapActions([
+      'GET_PRODUCTS_FROM_DATA'
+    ]),
+  },
+  mounted() {
+    this.GET_PRODUCTS_FROM_DATA()
   },
 
   beforeCreate() {
