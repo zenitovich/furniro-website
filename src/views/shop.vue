@@ -6,16 +6,18 @@
               <div class="shop-header__filter--border"></div>
               <div class="shop-header__filter--results">32 results</div>
           </div>
-          <div class="shop-carts">
-              <shop-cart
-                      v-for="product in this.$store.state.products"
-                      :key="product.id">
-              </shop-cart>
-          </div>
           <div class="shop-header__sort">
               <div class="shop-header__sort--text"> Short by</div>
               <div class="shop-header__sort--input"><input type="text" placeholder="Default" class="shop__sort--input-input"></div>
           </div>
+      </div>
+      <div class="shop-carts">
+          <shop-cart
+                  v-for="product in PRODUCTS"
+                  :key="product.id"
+                  v-bind:product_data="product"
+          >
+          </shop-cart>
       </div>
       <div class="shop-footer">
           <div class="shop-footer__pagination">
@@ -30,7 +32,7 @@
 
 <script>
 import ShopCart from "@/components/Shop-cart.vue";
-import {mapActions} from "vuex";
+import {mapActions, mapGetters} from "vuex";
 
 export default {
   name: "shop-page",
@@ -40,11 +42,19 @@ export default {
     return {
     }
   },
+
+  computed: {
+    ...mapGetters([
+      'PRODUCTS'
+    ])
+  },
+
   methods: {
     ...mapActions([
       'GET_PRODUCTS_FROM_DATA'
     ]),
   },
+
   mounted() {
     this.GET_PRODUCTS_FROM_DATA()
   },
