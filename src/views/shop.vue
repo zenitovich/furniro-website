@@ -8,12 +8,14 @@
           </div>
           <div class="shop-header__sort">
               <div class="shop-header__sort--text"> Short by</div>
-              <div class="shop-header__sort--input"><input type="text" placeholder="Default" class="shop__sort--input-input"></div>
+              <div class="shop-header__sort--input">
+                  <input type="text" v-model="filter" placeholder="Default" class="shop__sort--input-input">
+              </div>
           </div>
       </div>
       <div class="shop-carts">
           <shop-cart
-                  v-for="product in PRODUCTS"
+                  v-for="product in filteredProducts(PRODUCTS)"
                   :key="product.id"
                   v-bind:product_data="product"
           >
@@ -21,10 +23,10 @@
       </div>
       <div class="shop-footer">
           <div class="shop-footer__pagination">
-              <div class="shop-footer__pagination--item">1</div>
-              <div class="shop-footer__pagination--item">2</div>
-              <div class="shop-footer__pagination--item">3</div>
-              <div class="shop-footer__pagination--item">Next</div>
+              <div class="shop-footer__pagination--item" @click="page = 1">1</div>
+              <div class="shop-footer__pagination--item" @click="page = 2">2</div>
+              <div class="shop-footer__pagination--item" @click="page = 3">3</div>
+              <div class="shop-footer__pagination--item" @click="page = page + 1">Next</div>
           </div>
       </div>
   </div>
@@ -40,6 +42,9 @@ export default {
 
   data() {
     return {
+      page: 1,
+      filter: '',
+      arrOfPages: [],
     }
   },
 
@@ -53,6 +58,18 @@ export default {
     ...mapActions([
       'GET_PRODUCTS_FROM_DATA'
     ]),
+    filteredProducts(products) {
+      const quantityOfProductsPerPage = 16;
+      const start = (this.page - 1) * quantityOfProductsPerPage;
+      const end = this.page * quantityOfProductsPerPage;
+
+      // const quantityOfPages = Math.ceil(products.length / quantityOfProductsPerPage);
+      // for (let i = quantityOfPages; i > 0; i --) {
+      //   this.arrOfPages.push(i)
+      // }
+
+      return products.filter(product => product.name.includes(this.filter)).slice(start, end)
+    },
   },
 
   mounted() {
