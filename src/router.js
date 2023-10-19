@@ -1,7 +1,3 @@
-import shop from "@/views/shop.vue";
+import shop from '@/views/shop.vue'
 
-export default [
-  { path: '/shop',
-    component: shop,
-  }
-]
+export default [{ path: '/shop', component: shop }]
