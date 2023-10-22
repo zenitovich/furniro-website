@@ -12,12 +12,6 @@
     &--likes, &--border, &--results, &--text, &--input {
       cursor: pointer;
       padding-left: 10px;
-      &-input {
-        font-size: 20px;
-      }
-      &-img {
-        margin-top: 10px;
-      }
     }
     &--likes {
       border-right: 2px solid gray;
@@ -56,4 +50,12 @@
   flex-wrap: wrap;
   justify-content: space-between;
   padding: 50px 75px;
+}
+
+.shop__sort--input {
+  padding: 10px 0px 10px 10px;
+  font-size: 20px;
+  font-family: Poppins;
+  border: none;
+  margin-left: 20px;
 }

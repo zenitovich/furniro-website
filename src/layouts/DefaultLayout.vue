@@ -6,23 +6,38 @@
           <img src="../assets/icons/logo.svg" alt="logo" />
         </div>
         <div class="header__list">
-          <div class="header__list--item">Home</div>
-          <div class="header__list--item">Shop</div>
-          <div class="header__list--item">About</div>
-          <div class="header__list--item">Contact</div>
+          <a href="home" class="header__list--item">Home</a>
+          <a href="shop" class="header__list--item">Shop</a>
+          <a href="about" class="header__list--item">About</a>
+          <a href="contact" class="header__list--item">Contact</a>
         </div>
         <div class="header__icons">
           <!--                  <div class="header__icons&#45;&#45;item"><img src="../assets/icons/profile.svg" alt="profile"/></div>-->
           <div class="header__icons--item">
-            <img src="../assets/icons/search.svg" alt="search" />
+            <img
+              v-if="disableSearchInput"
+              src="../assets/icons/search.svg"
+              alt="search"
+              @click="disableSearchInput = false"
+            />
+          </div>
+          <div class="header__icons--item" v-if="disableSearchInput === false">
+            <input
+              type="text"
+              placeholder="home"
+              v-model="nameOfPage"
+              @keydown.enter="selectPage"
+            />
           </div>
           <!--                  <div class="header__icons&#45;&#45;item"><img src="../assets/icons/likes.svg" alt="likes"/></div>-->
           <div class="header__icons--item">
-            <img src="../assets/icons/cart.svg" alt="cart" />
+            <a href="basket">
+              <img src="../assets/icons/cart.svg" alt="cart" />
+            </a>
           </div>
         </div>
       </div>
-      <div class="header-background-image">Shop</div>
+      <div class="header-background-image">{{ location }}</div>
     </div>
     <section class="content">
       <slot />
@@ -82,11 +97,11 @@
           </div>
         </div>
         <div class="footer__menu--links">
-          links
-          <div class="footer__menu--links-item">Home</div>
-          <div class="footer__menu--links-item">Shop</div>
-          <div class="footer__menu--links-item">About</div>
-          <div class="footer__menu--links-item">Contact</div>
+          Links
+          <a href="home" class="footer__menu--links-item">Home</a>
+          <a href="shop" class="footer__menu--links-item">Shop</a>
+          <a href="about" class="footer__menu--links-item">About</a>
+          <a href="contact" class="footer__menu--links-item">Contact</a>
         </div>
         <div class="footer__menu--help">
           Help
@@ -99,12 +114,13 @@
           <input
             class="footer__menu--newsletter-email"
             type="email"
-            placeholder="Enter Your Email Adres."
+            placeholder="Enter Your Email Adress"
           />
           <input
             class="footer__menu--newsletter-btn"
             type="button"
             value="SUBSCRIBE"
+            @click="subscribed"
           />
         </div>
       </div>
@@ -118,7 +134,41 @@
 
 <script>
 export default {
-  name: 'DefaultLayout'
+  name: 'DefaultLayout',
+
+  data() {
+    return {
+      location: window.location.pathname.slice(1),
+      disableSearchInput: true,
+      nameOfPage: ''
+    }
+  },
+
+  methods: {
+    subscribed() {
+      alert('You subscribed!')
+    },
+
+    selectPage() {
+      if (
+        this.nameOfPage === 'about' ||
+        this.nameOfPage === 'shop' ||
+        this.nameOfPage === 'basket' ||
+        this.nameOfPage === 'home' ||
+        this.nameOfPage === 'contact'
+      ) {
+        window.location.pathname = this.nameOfPage
+      }
+    }
+  }
+
+  // watch: {
+  //   selectPage() {
+  //     if (this.selectPage === 'about') {
+  //       window.location.pathname = this.selectPage
+  //     }
+  //   }
+  // }
 }
 </script>
 

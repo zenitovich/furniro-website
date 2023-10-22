@@ -2,26 +2,22 @@
   <div class="shop">
     <div class="shop-header">
       <div class="shop-header__filter">
-        <div class="shop-header__filter--likes">
-          <img
-            src="../assets/icons/likes.svg"
-            class="shop__filter--likes-img"
-            alt="likes"
-          />
-        </div>
+        <img
+          src="../assets/icons/likes.svg"
+          class="shop-header__filter--likes"
+          alt="likes"
+        />
         <div class="shop-header__filter--border"></div>
         <div class="shop-header__filter--results">32 results</div>
       </div>
       <div class="shop-header__sort">
         <div class="shop-header__sort--text">Short by</div>
-        <div class="shop-header__sort--input">
-          <input
-            type="text"
-            v-model="filter"
-            placeholder="Default"
-            class="shop__sort--input-input"
-          />
-        </div>
+        <input
+          type="text"
+          v-model="filter"
+          placeholder="Default"
+          class="shop__sort--input"
+        />
       </div>
     </div>
     <div class="shop-carts">
@@ -51,7 +47,7 @@
         </div>
         <div
           class="shop-footer__pagination--item"
-          v-if="page < 3"
+          v-if="page < arrOfPages.length"
           @click="page = page + 1"
         >
           Next
@@ -85,16 +81,13 @@ export default {
       const start = (this.page - 1) * quantityOfProductsPerPage
       const end = this.page * quantityOfProductsPerPage
       const arrOfPages = []
-
       const quantityOfPages = Math.ceil(
         this.PRODUCTS.filter((product) => product.name.includes(this.filter))
           .length / quantityOfProductsPerPage
       )
-      for (let i = quantityOfPages; i > 0; i - 1) {
-        arrOfPages.push(i)
-      }
 
-      this.method(arrOfPages)
+      this.getArrayOfPages(arrOfPages, quantityOfPages)
+
       return this.PRODUCTS.filter((product) =>
         product.name.includes(this.filter)
       ).slice(start, end)
@@ -103,9 +96,13 @@ export default {
 
   methods: {
     ...mapActions(['GET_PRODUCTS_FROM_DATA']),
-    method(arrOfPages) {
+
+    getArrayOfPages(arrOfPages, quantityOfPages) {
+      for (let i = quantityOfPages; i > 0; i--) {
+        arrOfPages.push(i)
+      }
+
       this.arrOfPages = arrOfPages
-      console.log(this.arrOfPages)
     }
   },
 
