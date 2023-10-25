@@ -46,4 +46,25 @@
     background-color: red;
     opacity: 0.75;
   }
+
+  &__options {
+    font-weight: 600;
+    color: rgba(184, 142, 47, 1);;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    background: rgba(58, 58, 58, 0.6);
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    &--add-to-cart, {
+      padding: 10px 40px;
+      background-color: white;
+      margin-bottom: 20px;
+    }
+  }
+}
+.shop-cart:hover .shop-cart__options {
+  display: flex;
 }

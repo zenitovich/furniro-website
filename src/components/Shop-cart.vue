@@ -1,5 +1,13 @@
 <template>
   <div class="shop-cart">
+    <div class="shop-cart__options">
+      <div class="shop-cart__options--add-to-cart">Add to cart</div>
+      <img
+        src="../assets/icons/like-in-cart.svg"
+        class="shop-cart__options--like"
+        @click="this.processLike"
+      />
+    </div>
     <img v-bind:src="product_data.image" class="shop-cart__image" />
     <div class="shop-cart__name">{{ product_data.name }}</div>
     <div class="shop-cart__kind">{{ product_data.kind }}</div>
@@ -19,6 +27,13 @@
 <script>
 export default {
   name: 'Shop-cart',
+
+  methods: {
+    processLike() {
+      console.log('liked!')
+    }
+  },
+
   props: {
     product_data: {
       type: Object,
