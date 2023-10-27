@@ -7,13 +7,21 @@
 </template>
 
 <script>
+import store from '@/store'
+
 export default {
   name: 'App',
   components: {},
+
   computed: {
     layout() {
       return this.$route?.meta?.layout || 'DefaultLayout'
     }
+  },
+
+  beforeCreate() {
+    this.$store.commit('initialiseStore')
+    console.log(this.$store.state.likedProducts)
   }
 }
 </script>

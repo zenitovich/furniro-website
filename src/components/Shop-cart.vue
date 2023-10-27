@@ -25,12 +25,15 @@
 </template>
 
 <script>
+import { mapMutations } from 'vuex'
+
 export default {
   name: 'Shop-cart',
 
   methods: {
+    ...mapMutations(['addLikedProduct']),
     processLike() {
-      console.log('liked!')
+      this.addLikedProduct(this.product_data.id)
     }
   },
 

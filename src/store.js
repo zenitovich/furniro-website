@@ -8,13 +8,28 @@ Vue.use(VueAxios, axios)
 
 const store = new Vuex.Store({
   state: {
-    products: []
+    products: [],
+    likedProducts: []
   },
+
   mutations: {
     SET_PRODUCTS_TO_STATE(state, products) {
       state.products = products
+    },
+    initialiseStore(state) {
+      if (localStorage.getItem('store')) {
+        this.replaceState(
+          Object.assign(state, JSON.parse(localStorage.getItem('store')))
+        )
+      }
+    },
+    addLikedProduct(state, likedProductId) {
+      if (!state.likedProducts.includes(likedProductId)) {
+        state.likedProducts.push(likedProductId)
+      }
     }
   },
+
   actions: {
     GET_PRODUCTS_FROM_DATA({ commit }) {
       return axios('http://localhost:4000/items/', {

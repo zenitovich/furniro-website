@@ -27,3 +27,8 @@ new Vue({
   router,
   store
 }).$mount('#app')
+
+store.subscribe((mutation, { likedProducts }) => {
+  //если значение равно ключу остаетс ятолько значение
+  localStorage.setItem('store', JSON.stringify({ likedProducts }))
+})
