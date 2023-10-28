@@ -5,7 +5,14 @@
       <img
         src="../assets/icons/like-in-cart.svg"
         class="shop-cart__options--like"
-        @click="this.processLike"
+        @click="processLike"
+        v-if="!like"
+      />
+      <img
+        src="../assets/icons/unlike.svg"
+        class="shop-cart__options--like"
+        @click="unlike"
+        v-if="like"
       />
     </div>
     <img v-bind:src="product_data.image" class="shop-cart__image" />
@@ -25,15 +32,38 @@
 </template>
 
 <script>
-import { mapMutations } from 'vuex'
+import { mapGetters, mapMutations } from 'vuex'
 
 export default {
   name: 'Shop-cart',
 
+  data() {
+    return {
+      like: false
+    }
+  },
+
+  computed: {
+    ...mapGetters(['LIKED_PRODUCTS'])
+  },
+
+  mounted() {
+    if (this.LIKED_PRODUCTS.includes(this.product_data.id)) {
+      this.like = true
+    }
+  },
+
   methods: {
-    ...mapMutations(['addLikedProduct']),
+    ...mapMutations(['addLikedProduct', 'removeLikedProducts']),
     processLike() {
+      this.like = true
       this.addLikedProduct(this.product_data.id)
+    },
+
+    unlike() {
+      this.like = false
+      this.removeLikedProducts(this.product_data.id)
+      //проблема с лайком из за индекса
     }
   },
 
