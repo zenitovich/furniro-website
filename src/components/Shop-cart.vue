@@ -1,7 +1,20 @@
 <template>
   <div class="shop-cart">
     <div class="shop-cart__options">
-      <div class="shop-cart__options--add-to-cart">Add to cart</div>
+      <div
+        class="shop-cart__options--add-to-cart"
+        v-if="!inCart"
+        @click="addToCart"
+      >
+        Add to cart
+      </div>
+      <div
+        class="shop-cart__options--remove-from-cart"
+        v-if="inCart"
+        @click="removeFromCart"
+      >
+        Remove from cart
+      </div>
       <img
         src="../assets/icons/like-in-cart.svg"
         class="shop-cart__options--like"
@@ -39,22 +52,31 @@ export default {
 
   data() {
     return {
-      like: false
+      like: false,
+      inCart: false
     }
   },
 
   computed: {
-    ...mapGetters(['LIKED_PRODUCTS'])
+    ...mapGetters(['LIKED_PRODUCTS', 'PRODUCTS_IN_CART'])
   },
 
   mounted() {
     if (this.LIKED_PRODUCTS.includes(this.product_data.id)) {
       this.like = true
     }
+    if (this.PRODUCTS_IN_CART.includes(this.product_data.id)) {
+      this.inCart = true
+    }
   },
 
   methods: {
-    ...mapMutations(['addLikedProduct', 'removeLikedProducts']),
+    ...mapMutations([
+      'addLikedProduct',
+      'removeLikedProducts',
+      'addProductToCart',
+      'removeProductFromCart'
+    ]),
     processLike() {
       this.like = true
       this.addLikedProduct(this.product_data.id)
@@ -63,7 +85,16 @@ export default {
     unlike() {
       this.like = false
       this.removeLikedProducts(this.product_data.id)
-      //проблема с лайком из за индекса
+    },
+
+    addToCart() {
+      this.inCart = true
+      this.addProductToCart(this.product_data.id)
+    },
+
+    removeFromCart() {
+      this.inCart = false
+      this.removeProductFromCart(this.product_data.id)
     }
   },
 

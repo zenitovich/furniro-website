@@ -31,7 +31,10 @@
           </div>
           <!--                  <div class="header__icons&#45;&#45;item"><img src="../assets/icons/likes.svg" alt="likes"/></div>-->
           <div class="header__icons--item">
-            <a href="basket">
+            <div class="header__icons--item-cart">
+              {{ this.PRODUCTS_IN_CART.length }}
+            </div>
+            <a href="cart">
               <img src="../assets/icons/cart.svg" alt="cart" />
             </a>
           </div>
@@ -133,6 +136,8 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   name: 'DefaultLayout',
 
@@ -142,6 +147,10 @@ export default {
       disableSearchInput: true,
       nameOfPage: ''
     }
+  },
+
+  computed: {
+    ...mapGetters(['PRODUCTS_IN_CART'])
   },
 
   methods: {
@@ -161,14 +170,6 @@ export default {
       }
     }
   }
-
-  // watch: {
-  //   selectPage() {
-  //     if (this.selectPage === 'about') {
-  //       window.location.pathname = this.selectPage
-  //     }
-  //   }
-  // }
 }
 </script>
 

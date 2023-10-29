@@ -2,8 +2,6 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
-import index from 'vuex'
-import { indexOf } from 'core-js/internals/array-includes'
 
 Vue.use(Vuex)
 Vue.use(VueAxios, axios)
@@ -11,7 +9,8 @@ Vue.use(VueAxios, axios)
 const store = new Vuex.Store({
   state: {
     products: [],
-    likedProducts: []
+    likedProducts: [],
+    productInCart: []
   },
 
   mutations: {
@@ -34,8 +33,21 @@ const store = new Vuex.Store({
     },
 
     removeLikedProducts(state, likedProductsId) {
-      let newArr = state.likedProducts.filter((id) => id !== likedProductsId)
-      state.likedProducts = newArr
+      state.likedProducts = state.likedProducts.filter(
+        (id) => id !== likedProductsId
+      )
+    },
+
+    addProductToCart(state, productId) {
+      if (!state.productInCart.includes(productId)) {
+        state.productInCart.push(productId)
+        console.log(state.productInCart, 'added')
+      }
+    },
+
+    removeProductFromCart(state, productId) {
+      state.productInCart = state.productInCart.filter((id) => id !== productId)
+      console.log(state.productInCart, 'remove')
     }
   },
 
@@ -61,6 +73,10 @@ const store = new Vuex.Store({
 
     LIKED_PRODUCTS(state) {
       return state.likedProducts
+    },
+
+    PRODUCTS_IN_CART(state) {
+      return state.productInCart
     }
   }
 })

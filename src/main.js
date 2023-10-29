@@ -28,7 +28,10 @@ new Vue({
   store
 }).$mount('#app')
 
-store.subscribe((mutation, { likedProducts }) => {
+store.subscribe((mutation, { likedProducts, productInCart }) => {
   //если значение равно ключу остаетс ятолько значение
-  localStorage.setItem('store', JSON.stringify({ likedProducts }))
+  localStorage.setItem(
+    'store',
+    JSON.stringify({ likedProducts, productInCart })
+  )
 })
