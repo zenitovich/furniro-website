@@ -137,6 +137,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import './default-layout.scss'
 
 export default {
   name: 'DefaultLayout',
@@ -166,7 +167,7 @@ export default {
         this.nameOfPage === 'home' ||
         this.nameOfPage === 'contact'
       ) {
-        window.location.pathname = this.nameOfPage
+        this.$router.push(this.nameOfPage)
       }
     }
   }

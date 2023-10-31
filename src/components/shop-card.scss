@@ -1,4 +1,5 @@
-.shop-cart {
+@import url('https://fonts.googleapis.com/css2?family=Poppins');
+.shop-card {
   position: relative;
   font-family: Poppins;
   display: flex;
@@ -76,6 +77,6 @@
     }
   }
 }
-.shop-cart:hover .shop-cart__options {
+.shop-card:hover .shop-card__options {
   display: flex;
 }

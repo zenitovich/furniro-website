@@ -1,4 +1,3 @@
-import './styles/styles.scss'
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import axios from 'axios'
@@ -7,7 +6,7 @@ import Vuex from 'vuex'
 import routes from '@/router'
 import DefaultLayout from '@/layouts/DefaultLayout.vue'
 import App from './App.vue'
-import store from '@/store'
+import store from '@/store/store'
 
 const router = new VueRouter({
   routes,

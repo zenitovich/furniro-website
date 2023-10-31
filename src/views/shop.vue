@@ -25,19 +25,19 @@
         <div class="shop-header__sort--text">Short by</div>
         <input
           type="text"
-          v-model="filter"
+          v-model="searchString"
           placeholder="Default"
           class="shop__sort--input"
         />
       </div>
     </div>
-    <div class="shop-carts">
-      <shop-cart
-        v-for="product in filteredProducts"
+    <div class="shop-cards">
+      <shop-card
+        v-for="product in productsToShow"
         :key="product.id"
         v-bind:product_data="product"
       >
-      </shop-cart>
+      </shop-card>
     </div>
     <div class="shop-footer">
       <div class="shop-footer__pagination">
@@ -70,20 +70,19 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
-
-import ShopCart from '@/components/Shop-cart.vue'
+import ShopCard from '@/components/shop-card.vue'
+import './shop.scss'
 
 export default {
   name: 'shop-page',
-  components: { ShopCart },
+  components: { ShopCard },
 
   data() {
     return {
       page: 1,
-      filter: '',
+      searchString: '',
       arrOfPages: [],
-      showLikedProducts: false,
-      numberOfLikes: 0
+      showLikedProducts: false
     }
   },
 
@@ -91,23 +90,33 @@ export default {
     ...mapGetters(['PRODUCTS', 'LIKED_PRODUCTS']),
 
     filteredProducts() {
+      if (this.showLikedProducts) {
+        return this.PRODUCTS.filter(
+          (product) =>
+            this.LIKED_PRODUCTS.includes(product.id) &&
+            product.name.includes(this.searchString)
+        )
+      } else {
+        return this.PRODUCTS.filter((product) =>
+          product.name.includes(this.searchString)
+        )
+      }
+    },
+
+    productsToShow() {
       const quantityOfProductsPerPage = 16
       const start = (this.page - 1) * quantityOfProductsPerPage
       const end = this.page * quantityOfProductsPerPage
 
       this.getArrayOfPages(quantityOfProductsPerPage)
 
-      if (this.showLikedProducts) {
-        return this.PRODUCTS.filter(
-          (product) =>
-            this.LIKED_PRODUCTS.includes(product.id) &&
-            product.name.includes(this.filter)
-        ).slice(start, end)
-      } else {
-        return this.PRODUCTS.filter((product) =>
-          product.name.includes(this.filter)
-        ).slice(start, end)
-      }
+      return this.filteredProducts.slice(start, end)
+    },
+
+    numberOfLikes() {
+      return this.showLikedProducts
+        ? this.LIKED_PRODUCTS.length
+        : this.PRODUCTS.length
     }
   },
 
@@ -117,14 +126,15 @@ export default {
     getArrayOfPages(quantityOfProductsPerPage) {
       const arrOfPages = []
       let quantityOfPages = Math.ceil(
-        this.PRODUCTS.filter((product) => product.name.includes(this.filter))
-          .length / quantityOfProductsPerPage
+        this.PRODUCTS.filter((product) =>
+          product.name.includes(this.searchString)
+        ).length / quantityOfProductsPerPage
       )
       if (this.showLikedProducts) {
         quantityOfPages = Math.ceil(
           this.PRODUCTS.filter(
             (product) =>
-              product.name.includes(this.filter) &&
+              product.name.includes(this.searchString) &&
               this.LIKED_PRODUCTS.includes(product.id)
           ).length / quantityOfProductsPerPage
         )
@@ -142,20 +152,12 @@ export default {
     this.GET_PRODUCTS_FROM_DATA()
   },
 
-  beforeUpdate() {
-    if (this.showLikedProducts) {
-      this.numberOfLikes = this.LIKED_PRODUCTS.length
-    } else {
-      this.numberOfLikes = this.PRODUCTS.length
-    }
-  },
-
   beforeCreate() {
     this.$route.meta.layout = 'DefaultLayout'
   },
 
   watch: {
-    filter() {
+    searchString() {
       this.page = 1
     },
 
