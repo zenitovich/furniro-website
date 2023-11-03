@@ -8,6 +8,7 @@
 
 <script>
 import store from '@/store/store'
+import { mapMutations } from 'vuex'
 
 export default {
   name: 'App',
@@ -20,8 +21,13 @@ export default {
   },
 
   beforeCreate() {
-    this.$store.commit('initialiseStore')
-    console.log(this.$store.state.likedProducts)
+    //надо будет поменять
+    // this.$store.commit('initialiseStore')
+    this.initialiseStore()
+  },
+
+  methods: {
+    ...mapMutations(['initialiseStore'])
   }
 }
 </script>

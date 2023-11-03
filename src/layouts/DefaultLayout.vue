@@ -32,7 +32,7 @@
           <!--                  <div class="header__icons&#45;&#45;item"><img src="../assets/icons/likes.svg" alt="likes"/></div>-->
           <div class="header__icons--item">
             <div class="header__icons--item-cart">
-              {{ this.PRODUCTS_IN_CART.length }}
+              {{ this.productsInCart.length }}
             </div>
             <a href="cart">
               <img src="../assets/icons/cart.svg" alt="cart" />
@@ -40,7 +40,7 @@
           </div>
         </div>
       </div>
-      <div class="header-background-image">{{ location }}</div>
+      <div class="header-background-image">{{ getLocation }}</div>
     </div>
     <section class="content">
       <slot />
@@ -138,20 +138,26 @@
 <script>
 import { mapGetters } from 'vuex'
 import './default-layout.scss'
+import { ARRAY_OF_PAGES } from '@/constants'
 
 export default {
   name: 'DefaultLayout',
 
   data() {
     return {
-      location: window.location.pathname.slice(1),
+      // location: window.location.pathname.slice(1),
       disableSearchInput: true,
       nameOfPage: ''
     }
   },
 
   computed: {
-    ...mapGetters(['PRODUCTS_IN_CART'])
+    ...mapGetters(['productsInCart']),
+
+    getLocation() {
+      return this.$route.path.slice(1)
+      console.log(this.$route)
+    }
   },
 
   methods: {
@@ -160,13 +166,8 @@ export default {
     },
 
     selectPage() {
-      if (
-        this.nameOfPage === 'about' ||
-        this.nameOfPage === 'shop' ||
-        this.nameOfPage === 'basket' ||
-        this.nameOfPage === 'home' ||
-        this.nameOfPage === 'contact'
-      ) {
+      if (ARRAY_OF_PAGES.includes(this.nameOfPage)) {
+        //надо нормально реализовать и из даты в компутед перенести все
         this.$router.push(this.nameOfPage)
       }
     }

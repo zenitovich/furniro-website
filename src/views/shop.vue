@@ -3,18 +3,14 @@
     <div class="shop-header">
       <div class="shop-header__filter">
         <img
-          src="../assets/icons/likes.svg"
+          :src="
+            showLikedProducts
+              ? require('../assets/icons/red-like.svg')
+              : require('../assets/icons/likes.svg')
+          "
           class="shop-header__filter--likes"
-          @click="showLikedProducts = true"
+          @click="showLikedProducts = !showLikedProducts"
           alt="likes"
-          v-if="!showLikedProducts"
-        />
-        <img
-          src="../assets/icons/red-like.svg"
-          class="shop-header__filter--likes"
-          @click="showLikedProducts = false"
-          alt="likes"
-          v-if="showLikedProducts"
         />
         <div class="shop-header__filter--border"></div>
         <div class="shop-header__filter--results">
@@ -35,7 +31,7 @@
       <shop-card
         v-for="product in productsToShow"
         :key="product.id"
-        v-bind:product_data="product"
+        :productData="product"
       >
       </shop-card>
     </div>
@@ -87,17 +83,17 @@ export default {
   },
 
   computed: {
-    ...mapGetters(['PRODUCTS', 'LIKED_PRODUCTS']),
+    ...mapGetters(['products', 'likedProducts']),
 
     filteredProducts() {
       if (this.showLikedProducts) {
-        return this.PRODUCTS.filter(
+        return this.products.filter(
           (product) =>
-            this.LIKED_PRODUCTS.includes(product.id) &&
+            this.likedProducts.includes(product.id) &&
             product.name.includes(this.searchString)
         )
       } else {
-        return this.PRODUCTS.filter((product) =>
+        return this.products.filter((product) =>
           product.name.includes(this.searchString)
         )
       }
@@ -115,8 +111,8 @@ export default {
 
     numberOfLikes() {
       return this.showLikedProducts
-        ? this.LIKED_PRODUCTS.length
-        : this.PRODUCTS.length
+        ? this.likedProducts.length
+        : this.products.length
     }
   },
 
@@ -126,16 +122,16 @@ export default {
     getArrayOfPages(quantityOfProductsPerPage) {
       const arrOfPages = []
       let quantityOfPages = Math.ceil(
-        this.PRODUCTS.filter((product) =>
+        this.products.filter((product) =>
           product.name.includes(this.searchString)
         ).length / quantityOfProductsPerPage
       )
       if (this.showLikedProducts) {
         quantityOfPages = Math.ceil(
-          this.PRODUCTS.filter(
+          this.products.filter(
             (product) =>
               product.name.includes(this.searchString) &&
-              this.LIKED_PRODUCTS.includes(product.id)
+              this.likedProducts.includes(product.id)
           ).length / quantityOfProductsPerPage
         )
       }

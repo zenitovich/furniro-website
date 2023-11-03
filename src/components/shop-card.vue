@@ -1,45 +1,38 @@
 <template>
   <div class="shop-card">
     <div class="shop-card__options">
-      <div
-        class="shop-card__options--add-to-cart"
-        v-if="!inCart"
-        @click="addToCart"
+      <button
+        :class="
+          inCart
+            ? 'shop-card__options--remove-from-cart'
+            : 'shop-card__options--add-to-cart'
+        "
+        @click="setCart(inCart)"
       >
-        Add to cart
-      </div>
-      <div
-        class="shop-card__options--remove-from-cart"
-        v-if="inCart"
-        @click="removeFromCart"
-      >
-        Remove from cart
-      </div>
+        {{ inCart ? 'Remove from cart' : 'Add to Cart' }}
+      </button>
       <img
-        src="../assets/icons/like-in-cart.svg"
+        :src="
+          isLiked
+            ? require('../assets/icons/unlike.svg')
+            : require('../assets/icons/like-in-cart.svg')
+        "
         class="shop-card__options--like"
-        @click="processLike"
-        v-if="!like"
-      />
-      <img
-        src="../assets/icons/unlike.svg"
-        class="shop-card__options--like"
-        @click="unlike"
-        v-if="like"
+        @click="setLike(isLiked)"
       />
     </div>
-    <img :src="product_data.image" class="shop-card__image" />
-    <div class="shop-card__name">{{ product_data.name }}</div>
-    <div class="shop-card__kind">{{ product_data.kind }}</div>
+    <img :src="productData.image" class="shop-card__image" />
+    <div class="shop-card__name">{{ productData.name }}</div>
+    <div class="shop-card__kind">{{ productData.kind }}</div>
     <div class="shop-card__price">
-      Rp {{ product_data.price }}
-      <div v-if="product_data.oldPrice" class="shop-card__old-price">
-        Rp {{ product_data.oldPrice }}
+      Rp {{ productData.price }}
+      <div v-if="productData.oldPrice" class="shop-card__old-price">
+        Rp {{ productData.oldPrice }}
       </div>
     </div>
     <!--        <div class="shop-card__type">{{ product_data.status.type}}</div>-->
-    <div v-if="product_data.status" class="shop-card__quantity">
-      - {{ product_data.status.quantity }}
+    <div v-if="productData.status" class="shop-card__quantity">
+      - {{ productData.status.quantity }}
     </div>
   </div>
 </template>
@@ -53,54 +46,34 @@ export default {
 
   data() {
     return {
-      like: false,
       inCart: false
     }
   },
 
   computed: {
-    ...mapGetters(['LIKED_PRODUCTS', 'PRODUCTS_IN_CART'])
-  },
+    ...mapGetters(['likedProducts', 'productsInCart']),
 
-  mounted() {
-    if (this.LIKED_PRODUCTS.includes(this.product_data.id)) {
-      this.like = true
-    }
-    if (this.PRODUCTS_IN_CART.includes(this.product_data.id)) {
-      this.inCart = true
+    isLiked(vm) {
+      return vm.likedProducts.includes(vm.productData.id)
     }
   },
 
   methods: {
-    ...mapMutations([
-      'addLikedProduct',
-      'removeLikedProducts',
-      'addProductToCart',
-      'removeProductFromCart'
-    ]),
-    processLike() {
-      this.like = true
-      this.addLikedProduct(this.product_data.id)
+    ...mapMutations(['setLikedProducts', 'setProductsInCart']),
+
+    setCart(inCart) {
+      inCart ? (this.inCart = false) : (this.inCart = true)
+      this.setProductsInCart([this.productData.id, this.inCart])
     },
 
-    unlike() {
-      this.like = false
-      this.removeLikedProducts(this.product_data.id)
-    },
-
-    addToCart() {
-      this.inCart = true
-      this.addProductToCart(this.product_data.id)
-    },
-
-    removeFromCart() {
-      this.inCart = false
-      this.removeProductFromCart(this.product_data.id)
+    setLike(like) {
+      like ? (like = false) : (like = true)
+      this.setLikedProducts([this.productData.id, like])
     }
   },
 
   props: {
-    product_data: {
+    productData: {
       type: Object,
       default() {
         return {}
