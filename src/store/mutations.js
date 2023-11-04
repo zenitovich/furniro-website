@@ -4,7 +4,10 @@ export const mutations = {
   },
 
   initialiseStore(state) {
-    if (localStorage.getItem('store')) {
+    if (
+      localStorage.getItem('store')
+      // && (state.productInCart.length > 0 || state.likedProducts.length > 0)
+    ) {
       this.replaceState(
         Object.assign(state, JSON.parse(localStorage.getItem('store')))
       )

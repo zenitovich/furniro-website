@@ -7,8 +7,7 @@
 </template>
 
 <script>
-import store from '@/store/store'
-import { mapMutations } from 'vuex'
+import { mapMutations } from 'vuex';
 
 export default {
   name: 'App',
@@ -16,18 +15,16 @@ export default {
 
   computed: {
     layout() {
-      return this.$route?.meta?.layout || 'DefaultLayout'
+      return this.$route?.meta?.layout || 'DefaultLayout';
     }
   },
 
-  beforeCreate() {
-    //надо будет поменять
-    // this.$store.commit('initialiseStore')
-    this.initialiseStore()
+  created() {
+    this.initialiseStore();
   },
 
   methods: {
     ...mapMutations(['initialiseStore'])
   }
-}
+};
 </script>

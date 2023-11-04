@@ -3,7 +3,12 @@ module.exports = {
     browser: true,
     es2021: true
   },
-  extends: ['plugin:vue/vue3-essential'],
+
+  extends: [
+    'plugin:vue/recommended',
+    'eslint:recommended',
+    'plugin:prettier/recommended'
+  ],
   overrides: [],
   parserOptions: {
     ecmaVersion: 'latest',

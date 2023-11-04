@@ -21,18 +21,13 @@
               @click="disableSearchInput = false"
             />
           </div>
-          <div class="header__icons--item" v-if="disableSearchInput === false">
-            <input
-              type="text"
-              placeholder="home"
-              v-model="nameOfPage"
-              @keydown.enter="selectPage"
-            />
+          <div v-if="disableSearchInput === false" class="header__icons--item">
+            <input v-model="nameOfPage" type="text" placeholder="home" @keydown.enter="selectPage" />
           </div>
           <!--                  <div class="header__icons&#45;&#45;item"><img src="../assets/icons/likes.svg" alt="likes"/></div>-->
           <div class="header__icons--item">
             <div class="header__icons--item-cart">
-              {{ this.productsInCart.length }}
+              {{ productsInCart.length }}
             </div>
             <a href="cart">
               <img src="../assets/icons/cart.svg" alt="cart" />
@@ -53,9 +48,7 @@
           </div>
           <div class="footer__advantages--item-theme">
             High Quality
-            <div class="footer__advantages--item-description">
-              Crafted from top materials
-            </div>
+            <div class="footer__advantages--item-description">Crafted from top materials</div>
           </div>
         </div>
         <div class="footer__advantages--item">
@@ -73,9 +66,7 @@
           </div>
           <div class="footer__advantages--item-theme">
             Free Shipping
-            <div class="footer__advantages--item-description">
-              Order over 150$
-            </div>
+            <div class="footer__advantages--item-description">Order over 150$</div>
           </div>
         </div>
         <div class="footer__advantages--item">
@@ -84,9 +75,7 @@
           </div>
           <div class="footer__advantages--item-theme">
             24/7 Support
-            <div class="footer__advantages--item-description">
-              Dedicated Support
-            </div>
+            <div class="footer__advantages--item-description">Dedicated Support</div>
           </div>
         </div>
       </div>
@@ -114,17 +103,8 @@
         </div>
         <div class="footer__menu--newsletter">
           NewsLetter
-          <input
-            class="footer__menu--newsletter-email"
-            type="email"
-            placeholder="Enter Your Email Adress"
-          />
-          <input
-            class="footer__menu--newsletter-btn"
-            type="button"
-            value="SUBSCRIBE"
-            @click="subscribed"
-          />
+          <input class="footer__menu--newsletter-email" type="email" placeholder="Enter Your Email Adress" />
+          <input class="footer__menu--newsletter-btn" type="button" value="SUBSCRIBE" @click="subscribed" />
         </div>
       </div>
       <div class="footer__info">
@@ -136,43 +116,40 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-import './default-layout.scss'
-import { ARRAY_OF_PAGES } from '@/constants'
+import { mapGetters } from 'vuex';
+import './default-layout.scss';
+import { ARRAY_OF_PAGES } from '@/constants';
 
 export default {
   name: 'DefaultLayout',
 
   data() {
     return {
-      // location: window.location.pathname.slice(1),
       disableSearchInput: true,
       nameOfPage: ''
-    }
+    };
   },
 
   computed: {
     ...mapGetters(['productsInCart']),
 
     getLocation() {
-      return this.$route.path.slice(1)
-      console.log(this.$route)
+      return this.$route.path.slice(1);
     }
   },
 
   methods: {
     subscribed() {
-      alert('You subscribed!')
+      alert('You subscribed!');
     },
 
     selectPage() {
       if (ARRAY_OF_PAGES.includes(this.nameOfPage)) {
-        //надо нормально реализовать и из даты в компутед перенести все
-        this.$router.push(this.nameOfPage)
+        this.$router.push(this.nameOfPage);
       }
     }
   }
-}
+};
 </script>
 
 <style scoped></style>
