@@ -14,7 +14,7 @@
       />
     </div>
     <img :src="productData.image" class="shop-card__image" />
-    <div class="shop-card__name">{{ productData.name }}</div>
+    <div class="shop-card__name" @click="$router.push(`/product-card/${productData.id}`)">{{ productData.name }}</div>
     <div class="shop-card__kind">{{ productData.kind }}</div>
     <div class="shop-card__price">
       Rp {{ productData.price }}
