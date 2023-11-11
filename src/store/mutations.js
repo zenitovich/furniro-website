@@ -3,6 +3,10 @@ export const mutations = {
     state.products = products;
   },
 
+  SET_PRODUCT(state, product) {
+    state.product = product;
+  },
+
   initialiseStore(state) {
     if (localStorage.getItem('store')) {
       this.replaceState(Object.assign(state, JSON.parse(localStorage.getItem('store'))));
@@ -27,17 +31,5 @@ export const mutations = {
     } else {
       state.productInCart = state.productInCart.filter((id) => id !== productId);
     }
-  },
-
-  addProductToCart(state, productId) {
-    if (!state.productInCart.includes(productId)) {
-      state.productInCart.push(productId);
-      console.log(state.productInCart, 'added');
-    }
-  },
-
-  removeProductFromCart(state, productId) {
-    state.productInCart = state.productInCart.filter((id) => id !== productId);
-    console.log(state.productInCart, 'remove');
   }
 };

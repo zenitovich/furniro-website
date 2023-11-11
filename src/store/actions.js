@@ -19,8 +19,8 @@ export const actions = {
       method: 'GET'
     })
       .then((product) => {
-        console.log(id, 'id');
-        return product;
+        commit('SET_PRODUCT', product.data);
+        return product.data;
       })
       .catch((error) => {
         console.log(error);
