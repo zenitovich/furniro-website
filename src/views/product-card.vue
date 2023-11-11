@@ -8,16 +8,29 @@
       <div class="product-card__description">{{ product.description }}</div>
       <div class="product-card__size">
         Size:
-        <div v-for="size in product.size" :key="size" class="product-card__size--item">{{ size }}</div>
+        <div v-for="size in product.size" :key="size" class="product-card__size--item">
+          <input
+            type="radio"
+            name="size"
+            value="size"
+            class="product-card__size--item-radio"
+            @click="checkSize(size)"
+          />
+          <label for="size" class="product-card__size--label">{{ size }}</label>
+        </div>
       </div>
       <div class="product-card__color">
         Color:
-        <div
-          v-for="color in product.color"
-          :key="color"
-          :style="`background-color: ${color}`"
-          class="product-card__color--item"
-        ></div>
+        <div v-for="color in product.color" :key="color" class="product-card__color--item">
+          <input
+            type="radio"
+            name="color"
+            value="color"
+            class="product-card__color--item-radio"
+            @click="checkColor(color)"
+          />
+          <label for="color" class="product-card__color--label" :style="`background-color: ${color}`"></label>
+        </div>
       </div>
       <div class="product-card__quantity">
         <div class="product-card__quantity--selector">
@@ -44,8 +57,25 @@ import './product-card.scss';
 export default {
   name: 'ProductCardPage',
 
+  data() {
+    return {
+      size: '',
+      color: ''
+    };
+  },
+
   methods: {
-    ...mapActions(['GET_PRODUCT_FROM_DATA'])
+    ...mapActions(['GET_PRODUCT_FROM_DATA']),
+
+    checkSize(size) {
+      this.size = size;
+      console.log(this.size);
+    },
+
+    checkColor(color) {
+      this.color = color;
+      console.log(this.color);
+    }
   },
 
   computed: {
