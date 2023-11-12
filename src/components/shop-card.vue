@@ -32,17 +32,15 @@ import { mapGetters, mapMutations } from 'vuex';
 export default {
   name: 'ShopCard',
 
-  data() {
-    return {
-      inCart: false
-    };
-  },
-
   computed: {
     ...mapGetters(['likedProducts', 'productsInCart']),
 
     isLiked(vm) {
       return vm.likedProducts.includes(vm.productData.id);
+    },
+
+    inCart(vm) {
+      return vm.productsInCart.includes(vm.productData.id);
     }
   },
 
@@ -50,8 +48,8 @@ export default {
     ...mapMutations(['setLikedProducts', 'setProductsInCart']),
 
     setCart(inCart) {
-      inCart ? (this.inCart = false) : (this.inCart = true);
-      this.setProductsInCart([this.productData.id, this.inCart]);
+      inCart ? (inCart = false) : (inCart = true);
+      this.setProductsInCart([this.productData.id, inCart]);
     },
 
     setLike(like) {

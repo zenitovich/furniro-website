@@ -25,9 +25,10 @@ export const mutations = {
 
   setProductsInCart(state, [productId, inCart]) {
     if (inCart) {
-      if (!state.productInCart.includes(productId)) {
-        state.productInCart.push(productId);
-      }
+      state.productInCart.push(productId);
+      // if (!state.productInCart.includes(productId)) {
+      //   state.productInCart.push(productId);
+      // }
     } else {
       state.productInCart = state.productInCart.filter((id) => id !== productId);
     }

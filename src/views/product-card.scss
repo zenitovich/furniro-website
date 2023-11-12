@@ -134,3 +134,22 @@
   width: 26px;
   border-radius: 50%;
 }
+
+.product-card__footer {
+  font-family: Poppins;
+  color: rgba(159, 159, 159, 1);
+  &--items {
+    display: flex;
+    font-size: 20px;
+    font-family: Poppins;
+    justify-content: center;
+  }
+  &--item {
+    padding: 20px;
+  }
+  &--text {
+    font-size: 13px;
+    max-width: 50%;
+    margin: 20px auto 50px auto;
+  }
+}
