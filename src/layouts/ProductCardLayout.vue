@@ -6,10 +6,10 @@
           <img src="../assets/icons/logo.svg" alt="logo" />
         </div>
         <div class="header__list">
-          <a href="../home" class="header__list--item">Home</a>
-          <a href="../shop" class="header__list--item">Shop</a>
-          <a href="../about" class="header__list--item">About</a>
-          <a href="../contact" class="header__list--item">Contact</a>
+          <a class="header__list--item" @click="$router.push('../home')">Home</a>
+          <a class="header__list--item" @click="$router.push('../shop')">Shop</a>
+          <a class="header__list--item" @click="$router.push('../about')">About</a>
+          <a class="header__list--item" @click="$router.push('../contact')">Contact</a>
         </div>
         <div class="header__icons">
           <!--                  <div class="header__icons&#45;&#45;item"><img src="../assets/icons/profile.svg" alt="profile"/></div>-->
@@ -21,7 +21,7 @@
               @click="disableSearchInput = false"
             />
           </div>
-          <div v-if="disableSearchInput === false" class="header__icons--item">
+          <div v-if="!disableSearchInput" class="header__icons--item">
             <input v-model="nameOfPage" type="text" placeholder="home" @keydown.enter="selectPage" />
           </div>
           <!--                  <div class="header__icons&#45;&#45;item"><img src="../assets/icons/likes.svg" alt="likes"/></div>-->
@@ -51,10 +51,10 @@
         </div>
         <div class="footer__menu--links">
           Links
-          <a href="home" class="footer__menu--links-item">Home</a>
-          <a href="shop" class="footer__menu--links-item">Shop</a>
-          <a href="about" class="footer__menu--links-item">About</a>
-          <a href="contact" class="footer__menu--links-item">Contact</a>
+          <a class="footer__menu--links-item" @click="$router.push('../home')">Home</a>
+          <a class="footer__menu--links-item" @click="$router.push('../shop')">Shop</a>
+          <a class="footer__menu--links-item" @click="$router.push('../about')">About</a>
+          <a class="footer__menu--links-item" @click="$router.push('../contact')">Contact</a>
         </div>
         <div class="footer__menu--help">
           Help
@@ -78,7 +78,6 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import './default-layout.scss';
 import { ARRAY_OF_PAGES } from '@/constants';
 
 export default {
@@ -113,4 +112,6 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped lang="scss">
+@import 'default-layout';
+</style>

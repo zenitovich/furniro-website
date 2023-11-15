@@ -117,7 +117,6 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import './default-layout.scss';
 import { ARRAY_OF_PAGES } from '@/constants';
 
 export default {
@@ -152,4 +151,6 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped lang="scss">
+@import 'default-layout.scss';
+</style>

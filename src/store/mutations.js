@@ -23,14 +23,11 @@ export const mutations = {
     }
   },
 
-  setProductsInCart(state, [productId, inCart]) {
+  setProductsInCart(state, [productId, inCart, quantity]) {
     if (inCart) {
-      state.productInCart.push(productId);
-      // if (!state.productInCart.includes(productId)) {
-      //   state.productInCart.push(productId);
-      // }
+      state.productInCart.push({ productId, quantity });
     } else {
-      state.productInCart = state.productInCart.filter((id) => id !== productId);
+      state.productInCart = state.productInCart.filter((product) => product.productId !== productId);
     }
   }
 };

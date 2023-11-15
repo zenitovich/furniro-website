@@ -1,5 +1,5 @@
-import shop from '@/views/shop.vue';
-import productCard from '@/views/product-card.vue';
+import shop from '@/views/shop/shop.vue';
+import productCard from '@/views/product-card/product-card.vue';
 
 export default [
   { path: '/shop', component: shop },

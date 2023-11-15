@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export const actions = {
-  GET_PRODUCTS_FROM_DATA({ commit }) {
+  fetchProducts({ commit }) {
     return axios('http://localhost:4000/items/', {
       method: 'GET'
     })
@@ -14,7 +14,7 @@ export const actions = {
         return error;
       });
   },
-  GET_PRODUCT_FROM_DATA({ commit }, id) {
+  fetchProduct({ commit }, id) {
     return axios(`http://localhost:4000/item/${id}`, {
       method: 'GET'
     })
