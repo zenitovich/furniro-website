@@ -116,6 +116,10 @@
 
     &--btn {
       cursor: pointer;
+      &:hover {
+        background-color: rgba(184, 142, 47, 1);
+        color: white;
+      }
     }
   }
 
@@ -127,6 +131,10 @@
     padding: 10px 30px;
     background-color: white;
     cursor: pointer;
+    &:hover {
+      background-color: rgba(184, 142, 47, 1);
+      color: white;
+    }
   }
 
   &__info {
@@ -149,7 +157,7 @@
         padding-left: 10px;
         &:hover {
           text-decoration: underline;
-          color: goldenrod;
+          color: rgba(184, 142, 47, 1);
         }
       }
     }
@@ -211,25 +219,46 @@
   &--reviews {
     display: flex;
     justify-content: space-around;
+    margin-bottom: 30px;
   }
 
   &--review {
-    width: 225px;
-    height: 225px;
-    background-color: honeydew;
+    width: 250px;
+    height: 250px;
     border-radius: 10px;
+    border: 2px solid rgba(184, 142, 47, 1);
     margin: 0px 20px;
-    padding: 10px;
+    color: rgba(159, 159, 159, 1);
+    cursor: pointer;
+    &:hover {
+      width: 275px;
+      height: 275px;
+    }
+
     &-name {
       color: black;
-      padding: 5px 0;
+      padding-left: 10px;
+      padding-top: 10px;
+      font-size: 20px;
     }
+
+    &-date {
+      padding: 10px;
+    }
+
     &-rating {
-      color: goldenrod;
-      padding: 5px 0;
+      color: rgba(184, 142, 47, 1);
+      background-color: #a0ffb8;
+      padding-left: 10px;
+      font-size: 20px;
+      border-top: 2px solid rgba(184, 142, 47, 1);
+      border-bottom: 2px solid rgba(184, 142, 47, 1);
     }
+
     &-comment {
       text-align: justify;
+      color: black;
+      padding: 10px;
     }
   }
 }

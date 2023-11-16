@@ -25,7 +25,16 @@ export const mutations = {
 
   setProductsInCart(state, [productId, inCart, quantity]) {
     if (inCart) {
-      state.productInCart.push({ productId, quantity });
+      const arrayOfId = state.productInCart.map((product) => product.productId);
+      if (!arrayOfId.includes(productId)) {
+        state.productInCart.push({ productId: productId, quantity: quantity });
+      } else {
+        state.productInCart.forEach((product) => {
+          if (product.productId === productId) {
+            product.quantity += quantity;
+          }
+        });
+      }
     } else {
       state.productInCart = state.productInCart.filter((product) => product.productId !== productId);
     }

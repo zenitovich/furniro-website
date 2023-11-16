@@ -49,7 +49,7 @@
             <li class="product-card__additional-info--item">
               Share:
               <a v-for="link in product.links" :key="link" class="product-card__additional-info--item-a" :href="link">{{
-                link
+                cuteTheLink(link)
               }}</a>
             </li>
           </ul>
@@ -65,9 +65,9 @@
           </div>
           <div class="product-card__footer--item" @click="itemInFooter = product.reviews">Reviews</div>
         </div>
-        <div v-if="itemInFooter === product.description" class="product-card__footer--description">
+        <p v-if="itemInFooter === product.description" class="product-card__footer--description">
           {{ itemInFooter }}
-        </div>
+        </p>
         <div v-if="itemInFooter === product.additionalInformation" class="product-card__footer--add-info">
           <div v-for="k in Object.keys(itemInFooter)" :key="k" class="product-card__footer--add-info-item">
             {{ k }}: {{ itemInFooter[k] }}
@@ -75,7 +75,7 @@
         </div>
         <div v-if="itemInFooter === product.reviews" class="product-card__footer--reviews">
           <div v-for="review in Object.assign({}, itemInFooter)" :key="review" class="product-card__footer--review">
-            <div class="product-card__footer--review-name">Autor: {{ review.name }}</div>
+            <div class="product-card__footer--review-name">Author: {{ review.name }}</div>
             <div class="product-card__footer--review-date">Review's date: {{ review.date }}</div>
             <div class="product-card__footer--review-rating">Product Rating: {{ review.rating }}</div>
             <div class="product-card__footer--review-comment">{{ review.comment }}</div>
@@ -122,10 +122,13 @@ export default {
     },
 
     setCart() {
-      console.log(this.product);
       if (this.count !== 0) {
         this.setProductsInCart([this.product.id, true, this.count]);
       }
+    },
+
+    cuteTheLink(link) {
+      return link.slice(12).split('/')[0];
     }
   },
 
