@@ -12,32 +12,34 @@
             Size:
             <div v-for="size in product.size" :key="size" class="product-card__size--item">
               <input
+                :id="size"
+                v-model="sizes"
                 type="radio"
                 name="size"
-                value="size"
+                :value="size"
                 class="product-card__size--item-radio"
-                @click="checkSize(size)"
               />
-              <label for="size" class="product-card__size--label">{{ size }}</label>
+              <label :for="size" class="product-card__size--label">{{ size }}</label>
             </div>
           </div>
           <div class="product-card__color">
             Color:
             <div v-for="color in product.color" :key="color" class="product-card__color--item">
               <input
+                :id="color"
+                v-model="colors"
                 type="radio"
                 name="color"
-                value="color"
+                :value="color"
                 class="product-card__color--item-radio"
-                @click="checkColor(color)"
               />
-              <label for="color" class="product-card__color--label" :style="`background-color: ${color}`"></label>
+              <label :for="color" class="product-card__color--label" :style="`background-color: ${color}`"></label>
             </div>
           </div>
           <div class="product-card__quantity">
             <div class="product-card__quantity--selector">
               <button v-if="count >= 1" class="product-card__quantity--btn" @click="counter('minus')">-</button>
-              <div class="product-card__quantity--number">{{ count }}</div>
+              <span class="product-card__quantity--number">{{ count }}</span>
               <button v-if="count < 10" class="product-card__quantity--btn" @click="counter('plus')">+</button>
             </div>
             <button class="product-card__add-to-cart" @click="setCart">Add to Cart</button>
@@ -59,23 +61,30 @@
     <section>
       <div class="product-card__footer">
         <div class="product-card__footer--items">
-          <div class="product-card__footer--item" @click="itemInFooter = product.description">Description</div>
-          <div class="product-card__footer--item" @click="itemInFooter = product.additionalInformation">
-            Additional Information
-          </div>
-          <div class="product-card__footer--item" @click="itemInFooter = product.reviews">Reviews</div>
+          <!--          Переделать на радиокнопки!!!!!!!-->
+          <label v-for="item in itemsInFooter" :key="item" :for="item" class="product-card__footer--item"
+            >{{ item }}
+            <input
+              :id="item"
+              v-model="itemInFooter"
+              type="radio"
+              name="itemInFooter"
+              :value="item"
+              class="product-card__footer--item-radio"
+            />
+          </label>
         </div>
-        <p v-if="itemInFooter === product.description" class="product-card__footer--description">
-          {{ itemInFooter }}
+        <p v-if="itemInFooter === 'Description'" class="product-card__footer--description">
+          {{ product.description }}
         </p>
-        <div v-if="itemInFooter === product.additionalInformation" class="product-card__footer--add-info">
-          <div v-for="k in Object.keys(itemInFooter)" :key="k" class="product-card__footer--add-info-item">
-            {{ k }}: {{ itemInFooter[k] }}
+        <div v-if="itemInFooter === 'Additional Information'" class="product-card__footer--add-info">
+          <div v-for="name in additionalInformation" :key="name" class="product-card__footer--add-info-item">
+            {{ name }}: {{ product.additionalInformation[name] }}
           </div>
         </div>
-        <div v-if="itemInFooter === product.reviews" class="product-card__footer--reviews">
-          <div v-for="review in Object.assign({}, itemInFooter)" :key="review" class="product-card__footer--review">
-            <div class="product-card__footer--review-name">Author: {{ review.name }}</div>
+        <div v-if="itemInFooter === 'Reviews'" class="product-card__footer--reviews">
+          <div v-for="review in product.reviews" :key="review.name" class="product-card__footer--review">
+            <div class="product-card__footer--review-name">Author: {{ review }}</div>
             <div class="product-card__footer--review-date">Review's date: {{ review.date }}</div>
             <div class="product-card__footer--review-rating">Product Rating: {{ review.rating }}</div>
             <div class="product-card__footer--review-comment">{{ review.comment }}</div>
@@ -97,26 +106,27 @@ export default {
       sizes: '',
       colors: '',
       count: 0,
-      itemInFooter: ''
+      itemInFooter: '',
+      itemsInFooter: ['Description', 'Additional Information', 'Reviews']
     };
+  },
+
+  computed: {
+    ...mapGetters(['product']),
+
+    additionalInformation() {
+      return Object.keys(this.product.additionalInformation);
+    }
   },
 
   methods: {
     ...mapActions(['fetchProduct']),
     ...mapMutations(['setProductsInCart']),
 
-    checkSize(size) {
-      this.sizes = size;
-    },
-
-    checkColor(color) {
-      this.colors = color;
-    },
-
     counter(value) {
       if (value === 'plus') {
         this.count++;
-      } else if (value === 'minus' && this.count !== 0) {
+      } else {
         this.count--;
       }
     },
@@ -132,12 +142,8 @@ export default {
     }
   },
 
-  computed: {
-    ...mapGetters(['product'])
-  },
-
   mounted() {
-    this.fetchProduct(`${this.$route.path.slice(14)}`);
+    this.fetchProduct(`${this.$route.params.id}`);
   }
 };
 </script>

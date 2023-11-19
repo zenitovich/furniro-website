@@ -199,6 +199,10 @@
       cursor: pointer;
       color: black;
     }
+
+    &-radio {
+      display: none;
+    }
   }
 
   &--description {
