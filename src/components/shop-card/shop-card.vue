@@ -8,13 +8,13 @@
         {{ inCart ? 'Remove from cart' : 'Add to Cart' }}
       </button>
       <img
-        :src="isLiked ? require('../assets/icons/unlike.svg') : require('../assets/icons/like-in-cart.svg')"
+        :src="isLiked ? require('../../assets/icons/unlike.svg') : require('../../assets/icons/like-in-cart.svg')"
         class="shop-card__options--like"
         @click="setLike(isLiked)"
       />
     </div>
     <img :src="productData.image" class="shop-card__image" />
-    <div class="shop-card__name">{{ productData.name }}</div>
+    <div class="shop-card__name" @click="$router.push(`/product-card/${productData.id}`)">{{ productData.name }}</div>
     <div class="shop-card__kind">{{ productData.kind }}</div>
     <div class="shop-card__price">
       Rp {{ productData.price }}
@@ -26,23 +26,21 @@
 </template>
 
 <script>
-import './shop-card.scss';
 import { mapGetters, mapMutations } from 'vuex';
 
 export default {
   name: 'ShopCard',
-
-  data() {
-    return {
-      inCart: false
-    };
-  },
 
   computed: {
     ...mapGetters(['likedProducts', 'productsInCart']),
 
     isLiked(vm) {
       return vm.likedProducts.includes(vm.productData.id);
+    },
+
+    inCart(vm) {
+      let result = vm.productsInCart.map((item) => item.productId);
+      return result.includes(vm.productData.id);
     }
   },
 
@@ -50,8 +48,7 @@ export default {
     ...mapMutations(['setLikedProducts', 'setProductsInCart']),
 
     setCart(inCart) {
-      inCart ? (this.inCart = false) : (this.inCart = true);
-      this.setProductsInCart([this.productData.id, this.inCart]);
+      this.setProductsInCart([this.productData.id, !inCart, 1]);
     },
 
     setLike(like) {
@@ -71,4 +68,6 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped lang="scss">
+@import 'shop-card';
+</style>

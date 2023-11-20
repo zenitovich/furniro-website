@@ -3,7 +3,7 @@
     <div class="shop-header">
       <div class="shop-header__filter">
         <img
-          :src="require(`../assets/icons/${showLikedProducts ? 'red-like' : 'likes'}.svg`)"
+          :src="require(`../../assets/icons/${showLikedProducts ? 'red-like' : 'likes'}.svg`)"
           class="shop-header__filter--likes"
           alt="likes"
           @click="showLikedProducts = !showLikedProducts"
@@ -32,8 +32,7 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex';
-import ShopCard from '@/components/shop-card.vue';
-import './shop.scss';
+import ShopCard from '@/components/shop-card/shop-card.vue';
 
 export default {
   name: 'ShopPage',
@@ -54,10 +53,12 @@ export default {
     filteredProducts() {
       if (this.showLikedProducts) {
         return this.products.filter(
-          (product) => this.likedProducts.includes(product.id) && product.name.includes(this.searchString)
+          (product) =>
+            this.likedProducts.includes(product.id) &&
+            product.name.toLowerCase().includes(this.searchString.toLowerCase())
         );
       } else {
-        return this.products.filter((product) => product.name.includes(this.searchString));
+        return this.products.filter((product) => product.name.toLowerCase().includes(this.searchString.toLowerCase()));
       }
     },
 
@@ -77,7 +78,7 @@ export default {
   },
 
   methods: {
-    ...mapActions(['GET_PRODUCTS_FROM_DATA']),
+    ...mapActions(['fetchProducts']),
 
     getArrayOfPages(quantityOfProductsPerPage) {
       const arrOfPages = [];
@@ -111,7 +112,7 @@ export default {
   },
 
   mounted() {
-    this.GET_PRODUCTS_FROM_DATA();
+    this.fetchProducts();
   },
 
   beforeCreate() {
@@ -120,4 +121,6 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped lang="scss">
+@import 'shop.scss';
+</style>

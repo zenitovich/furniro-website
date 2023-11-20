@@ -1,0 +1,268 @@
+.product-card {
+  padding: 40px 0;
+  font-family: Poppins;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+
+  &__image,&__name, &__price, &__rating, &__description, &__color, &__size, &__quantity {
+    padding: 7px 0;
+  }
+
+  &__image {
+    border-radius: 20px;
+    min-width: 400px;
+    max-height: 500px;
+    margin-right: 100px;
+  }
+
+  &__name {
+    font-size: 42px;
+    margin: 0;
+  }
+
+  &__price {
+    font-size: 24px;
+    color: rgba(159, 159, 159, 1);
+  }
+
+  &__rating {
+    color: gold;
+    font-size: 24px;
+    font-weight: 700;
+  }
+
+  &__description {
+    font-size: 13px;
+    text-align: justify;
+    max-width: 400px;
+  }
+
+  &__color, &__size {
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    color: rgba(159, 159, 159, 1);
+
+    &--item {
+      position: relative;
+      color: black;
+      width: 26px;
+      height: 26px;
+      font-weight: lighter;
+      margin: 0px 5px;
+
+      &-radio {
+        width: 26px;
+        height: 26px;
+        position: absolute;
+        left: -5px;
+        bottom: 0px;
+        opacity: 0;
+        cursor: pointer;
+      }
+
+      &:first-child {
+        margin-left: 15px;
+      }
+    }
+  }
+
+  &__color {
+
+    &--item {
+
+      &-radio:checked ~ .product-card__color--label {
+        height: 20px;
+        width: 20px;
+        border: 4px solid rgba(184, 142, 47, 1);
+      }
+    }
+  }
+
+  &__size {
+
+    &--item {
+      text-align: center;
+
+      &-radio:checked ~ .product-card__size--label {
+        background-color: white;
+        color: rgba(184, 142, 47, 1);
+        border: 1px solid rgba(184, 142, 47, 1);
+        height: 25px;
+        width: 25px;
+      }
+    }
+  }
+
+  &__quantity {
+    display: flex;
+    flex-direction: row;
+    padding-bottom: 50px;
+    border-bottom: 1px solid rgba(159, 159, 159, 1);
+
+    &--selector {
+      display: flex;
+      border: 2px solid lightgrey;
+      border-radius: 5px;
+    }
+
+    &--btn, &--number {
+      font-size: 20px;
+      border: none;
+      background: white;
+      padding: 10px 20px;
+    }
+
+    &--btn {
+      cursor: pointer;
+      &:hover {
+        background-color: rgba(184, 142, 47, 1);
+        color: white;
+      }
+    }
+  }
+
+  &__add-to-cart {
+    font-size: 20px;
+    margin-left: 20px;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 10px 30px;
+    background-color: white;
+    cursor: pointer;
+    &:hover {
+      background-color: rgba(184, 142, 47, 1);
+      color: white;
+    }
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__additional-info {
+    margin-top: 50px;
+    list-style-type: none;
+    padding: 0;
+
+    &--item {
+      padding-bottom: 14px;
+      font-size: 13px;
+      color: rgba(159, 159, 159, 1);
+      &-a {
+        text-decoration: none;
+        color: rgba(159, 159, 159, 1);
+        padding-left: 10px;
+        &:hover {
+          text-decoration: underline;
+          color: rgba(184, 142, 47, 1);
+        }
+      }
+    }
+  }
+}
+
+.product-card__size--label {
+  display: block;
+  height: 26px;
+  width: 26px;
+  color: white;
+  background-color: rgba(184, 142, 47, 1);
+  border-radius: 5px;
+}
+
+.product-card__color--label {
+  display: block;
+  height: 26px;
+  width: 26px;
+  border-radius: 50%;
+}
+
+.product-card__footer {
+  font-family: Poppins;
+  color: rgba(159, 159, 159, 1);
+
+  &--items {
+    display: flex;
+    font-size: 20px;
+    font-family: Poppins;
+    justify-content: center;
+  }
+
+  &--item {
+    padding: 20px;
+
+    &:hover {
+      text-decoration: underline;
+      cursor: pointer;
+      color: black;
+    }
+
+    &-radio {
+      display: none;
+    }
+  }
+
+  &--description {
+    font-size: 13px;
+    max-width: 50%;
+    margin: 20px auto 50px auto;
+    text-align: justify;
+  }
+
+  &--add-info {
+    display: flex;
+    justify-content: center;
+    &-item {
+      padding: 0 10px;
+    }
+  }
+
+  &--reviews {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 30px;
+  }
+
+  &--review {
+    width: 250px;
+    height: 250px;
+    border-radius: 10px;
+    border: 2px solid rgba(184, 142, 47, 1);
+    margin: 0px 20px;
+    color: rgba(159, 159, 159, 1);
+    cursor: pointer;
+    &:hover {
+      width: 275px;
+      height: 275px;
+    }
+
+    &-name {
+      color: black;
+      padding-left: 10px;
+      padding-top: 10px;
+      font-size: 20px;
+    }
+
+    &-date {
+      padding: 10px;
+    }
+
+    &-rating {
+      color: rgba(184, 142, 47, 1);
+      background-color: #a0ffb8;
+      padding-left: 10px;
+      font-size: 20px;
+      border-top: 2px solid rgba(184, 142, 47, 1);
+      border-bottom: 2px solid rgba(184, 142, 47, 1);
+    }
+
+    &-comment {
+      text-align: justify;
+      color: black;
+      padding: 10px;
+    }
+  }
+}

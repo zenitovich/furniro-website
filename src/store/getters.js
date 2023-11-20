@@ -1,13 +1,17 @@
 export const getters = {
   products(state) {
-    return state.products
+    return state.products;
   },
 
   likedProducts(state) {
-    return state.likedProducts
+    return state.likedProducts;
   },
 
   productsInCart(state) {
-    return state.productInCart
+    return state.productInCart;
+  },
+
+  product(state) {
+    return state.product;
   }
-}
+};

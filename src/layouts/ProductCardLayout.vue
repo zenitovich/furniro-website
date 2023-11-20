@@ -13,9 +13,9 @@ import DefaultHeader from '@/layouts/DefaultHeader.vue';
 import DefaultFooter from '@/layouts/DefaultFooter.vue';
 
 export default {
-  name: 'DefaultLayout',
+  name: 'ProductCardLayout',
   components: { DefaultFooter, DefaultHeader }
 };
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped></style>
