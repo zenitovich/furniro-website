@@ -24,6 +24,10 @@
         <div class="shop-footer__pagination--item" @click="page = 1">1</div>
         <div v-if="arrOfPages.length > 1" class="shop-footer__pagination--item" @click="page = 2">2</div>
         <div v-if="arrOfPages.length > 2" class="shop-footer__pagination--item" @click="page = 3">3</div>
+        <div v-if="arrOfPages.length > 2" class="shop-footer__pagination--item" @click="page = 4">4</div>
+        <div v-if="arrOfPages.length > 2" class="shop-footer__pagination--item" @click="page = 5">5</div>
+        <div v-if="arrOfPages.length > 2" class="shop-footer__pagination--item" @click="page = 6">6</div>
+        <div v-if="arrOfPages.length > 2" class="shop-footer__pagination--item" @click="page = 7">7</div>
         <div v-if="page < arrOfPages.length" class="shop-footer__pagination--item" @click="page = page + 1">Next</div>
       </div>
     </div>

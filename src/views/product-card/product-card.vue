@@ -6,7 +6,7 @@
         <div class="product-card__info">
           <h1 class="product-card__name">{{ product.name }}</h1>
           <div class="product-card__price">Rs. {{ product.price }}.00</div>
-          <div class="product-card__rating">Rating: {{ product.rating }}</div>
+          <div class="product-card__rating">Rating: {{ product.rating }} / 5</div>
           <div class="product-card__description">{{ product.description }}</div>
           <div class="product-card__size">
             Size:
@@ -84,7 +84,7 @@
         </div>
         <div v-if="itemInFooter === 'Reviews'" class="product-card__footer--reviews">
           <div v-for="review in product.reviews" :key="review.name" class="product-card__footer--review">
-            <div class="product-card__footer--review-name">Author: {{ review }}</div>
+            <div class="product-card__footer--review-name">Author: {{ review.name }}</div>
             <div class="product-card__footer--review-date">Review's date: {{ review.date }}</div>
             <div class="product-card__footer--review-rating">Product Rating: {{ review.rating }}</div>
             <div class="product-card__footer--review-comment">{{ review.comment }}</div>
@@ -126,6 +126,7 @@ export default {
     counter(value) {
       if (value === 'plus') {
         this.count++;
+        console.log(this.product);
       } else {
         this.count--;
       }

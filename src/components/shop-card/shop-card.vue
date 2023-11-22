@@ -21,7 +21,7 @@
       <div v-if="productData.oldPrice" class="shop-card__old-price">Rp {{ productData.oldPrice }}</div>
     </div>
     <!--        <div class="shop-card__type">{{ product_data.status.type}}</div>-->
-    <div v-if="productData.status" class="shop-card__quantity">- {{ productData.status.quantity }}</div>
+    <div v-if="productData.status" class="shop-card__quantity">- {{ productData.status.quantity }} %</div>
   </div>
 </template>
 
