@@ -48,7 +48,14 @@ export default {
     ...mapMutations(['setLikedProducts', 'setProductsInCart']),
 
     setCart(inCart) {
-      this.setProductsInCart([this.productData.id, !inCart, 1]);
+      this.setProductsInCart([
+        this.productData.id,
+        !inCart,
+        1,
+        this.productData.image,
+        this.productData.name,
+        this.productData.price
+      ]);
     },
 
     setLike(like) {

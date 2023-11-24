@@ -23,11 +23,11 @@ export const mutations = {
     }
   },
 
-  setProductsInCart(state, [productId, inCart, quantity]) {
+  setProductsInCart(state, [productId, inCart, quantity, image, name, price]) {
     if (inCart) {
       const arrayOfId = state.productInCart.map((product) => product.productId);
       if (!arrayOfId.includes(productId)) {
-        state.productInCart.push({ productId: productId, quantity: quantity });
+        state.productInCart.push({ productId: productId, quantity: quantity, image: image, name: name, price: price });
       } else {
         state.productInCart.forEach((product) => {
           if (product.productId === productId) {

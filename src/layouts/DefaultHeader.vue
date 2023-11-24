@@ -22,7 +22,7 @@
           <div class="header__icons--item-cart">
             {{ productsInCart.length }}
           </div>
-          <a href="cart">
+          <a @click="$router.push('../cart')">
             <img src="../assets/icons/cart.svg" alt="cart" />
           </a>
         </div>

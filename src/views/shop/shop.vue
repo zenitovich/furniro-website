@@ -117,10 +117,6 @@ export default {
 
   mounted() {
     this.fetchProducts();
-  },
-
-  beforeCreate() {
-    this.$route.meta.layout = 'DefaultLayout';
   }
 };
 </script>
