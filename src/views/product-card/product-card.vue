@@ -134,14 +134,7 @@ export default {
 
     setCart() {
       if (this.count !== 0) {
-        this.setProductsInCart([
-          this.product.id,
-          true,
-          this.count,
-          this.product.image,
-          this.product.name,
-          this.product.price
-        ]);
+        this.setProductsInCart([this.product.id, true, this.count]);
       }
     },
 
