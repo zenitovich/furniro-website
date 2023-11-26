@@ -24,9 +24,7 @@ export const mutations = {
   },
 
   setProductsInCart(state, [productId, inCart, quantity]) {
-    console.log(inCart);
     if (inCart) {
-      console.log('added', inCart);
       const arrayOfId = state.productInCart.map((product) => product.productId);
       if (!arrayOfId.includes(productId)) {
         state.productInCart.push({ productId: productId, quantity: quantity });
@@ -38,9 +36,7 @@ export const mutations = {
         });
       }
     } else {
-      console.log('remove', inCart);
       state.productInCart = state.productInCart.filter((product) => product.productId !== productId);
-      console.log(state.productInCart);
     }
   }
 };

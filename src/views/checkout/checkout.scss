@@ -1,0 +1,125 @@
+.checkout {
+  display: flex;
+  justify-content: space-around;
+  font-family: Poppins;
+  padding: 100px;
+
+  &__details {
+    display: flex;
+    flex-direction: column;
+
+    &--label {
+      margin-bottom: 20px;
+    }
+
+    &--title {
+      margin: 0 0 20px 0;
+    }
+
+    &--names {
+      display: flex;
+      justify-content: space-between;
+      margin: 20px 0px 40px 0;
+
+      &-block {
+        display: flex;
+        flex-direction: column;
+      }
+
+      &-name {
+        width: 210px;
+        height: 75px;
+        border-radius: 10px;
+        border: 1px solid rgba(159, 159, 159, 1);
+        font-size: 24px;
+        cursor: pointer;
+      }
+    }
+
+    &--item {
+      width: 450px;
+      height: 75px;
+      border: 1px solid rgba(159, 159, 159, 1);
+      border-radius: 10px;
+      margin-bottom: 40px;
+      font-size: 24px;
+      cursor: pointer;
+    }
+  }
+
+  &__order {
+    display: flex;
+    flex-direction: column;
+    max-width: 530px;
+
+    &--info, &--description, &--btn {
+      padding: 40px 0;
+    }
+
+    &--info {
+      display: flex;
+      flex-direction: column;
+
+      &-titles, &-total, &-products {
+        display: flex;
+        justify-content: space-between;
+      }
+
+      &-product {
+        color: lightgrey;
+        padding: 10px 0;
+        span {
+          margin-left: 10px;
+        }
+      }
+
+      &-name {
+        padding: 10px 0;
+      }
+
+      &-final-price {
+        font-weight: bold;
+        color: goldenrod;
+        font-size: 24px;
+      }
+    }
+
+    &--description {
+      padding: 20px 0px 40px 0px;
+      border-top: 1px solid lightgrey;
+      h1 {
+        position: relative;
+        margin-left: 50px;
+        &:before {
+          position: absolute;
+          width: 25px;
+          height: 25px;
+          background-color: black;
+          border-radius: 50%;
+          content: '';
+          top: 5px;
+          left: -50px;
+        }
+      }
+      p {
+        text-align: justify;
+      }
+    }
+    &--btn {
+      align-self: center;
+      background-color: floralwhite;
+      border: 1px solid black;
+      font-family: Poppins;
+      font-size: 20px;
+      border-radius: 10px;
+      padding: 10px 35px;
+      margin: 30px 0;
+      cursor: pointer;
+      &:hover {
+        background-color: goldenrod;
+        color: white;
+        border-color: white;
+      }
+    }
+  }
+}
