@@ -1,37 +1,37 @@
 <template>
-  <div class="checkout">
+  <form class="checkout" @submit="sendingData()">
     <div class="checkout__details">
-      <h1 class="checkout__details--title">Billing Details</h1>
+      <h2 class="checkout__details--title">Billing Details</h2>
       <div class="checkout__details--names">
         <div class="checkout__details--names-block">
-          <label class="checkout__details--label">First name</label>
-          <input type="text" class="checkout__details--names-name" />
+          <label class="checkout__details--label" for="first-name">First name</label>
+          <input id="first-name" type="text" class="checkout__details--names-name" name="first-name" />
         </div>
         <div class="checkout__details--names-block">
-          <label class="checkout__details--label">Last name</label>
-          <input type="text" class="checkout__details--names-name" />
+          <label class="checkout__details--label" for="second-name">Last name</label>
+          <input id="second-name" type="text" class="checkout__details--names-name" name="second-name" />
         </div>
       </div>
-      <label class="checkout__details--label">Company name (optional)</label>
-      <input type="text" class="checkout__details--item" />
-      <label class="checkout__details--label">Country / Region</label>
-      <select class="checkout__details--item">
-        <option v-for="country in LIST_OF_COUNTRIES()" :key="country" :value="country">{{ country }}</option>
+      <label class="checkout__details--label" for="company-name">Company name (optional)</label>
+      <input id="company-name" type="text" class="checkout__details--item" name="company-name" />
+      <label class="checkout__details--label" for="country">Country / Region</label>
+      <select id="country" class="checkout__details--item" name="country">
+        <option v-for="country in countries" :key="country" :value="country">{{ country }}</option>
       </select>
-      <label class="checkout__details--label">Street address</label>
-      <input type="text" class="checkout__details--item" />
-      <label class="checkout__details--label">Town / City</label>
-      <input type="text" class="checkout__details--item" />
-      <label class="checkout__details--label">Province</label>
-      <select class="checkout__details--item">
-        <option v-for="country in LIST_OF_COUNTRIES()" :key="country" :value="country">{{ country }}</option>
+      <label class="checkout__details--label" for="address">Street address</label>
+      <input id="address" type="text" class="checkout__details--item" name="address" />
+      <label class="checkout__details--label" for="city">Town / City</label>
+      <input id="city" type="text" class="checkout__details--item" name="city" />
+      <label class="checkout__details--label" for="province">Province</label>
+      <select id="province" class="checkout__details--item" name="province">
+        <option v-for="country in countries" :key="country" :value="country">{{ country }}</option>
       </select>
-      <label class="checkout__details--label">ZIP code</label>
-      <input type="text" class="checkout__details--item" />
-      <label class="checkout__details--label">Phone</label>
-      <input type="tel" class="checkout__details--item" />
-      <label class="checkout__details--label">Email</label>
-      <input type="email" class="checkout__details--item" />
+      <label class="checkout__details--label" for="zip">ZIP code</label>
+      <input id="zip" type="text" class="checkout__details--item" name="zip" />
+      <label class="checkout__details--label" for="phone">Phone</label>
+      <input id="phone" type="tel" class="checkout__details--item" name="phone" />
+      <label class="checkout__details--label" for="email">Email</label>
+      <input id="email" type="email" class="checkout__details--item" name="email" />
       <input type="text" class="checkout__details--item" placeholder="Additional Information" />
     </div>
     <div class="checkout__order">
@@ -48,11 +48,11 @@
         </div>
         <div class="checkout__order--info-total">
           <div class="checkout__order--info-name">Subtotal</div>
-          <div class="checkout__order--info-price">Rs {{ getTotal }},000</div>
+          <div class="checkout__order--info-price">Rs {{ totalPriceInCart }},000</div>
         </div>
         <div class="checkout__order--info-total">
           <div class="checkout__order--info-name">Total</div>
-          <div class="checkout__order--info-final-price">Rs {{ getTotal }},000</div>
+          <div class="checkout__order--info-final-price">Rs {{ totalPriceInCart }},000</div>
         </div>
       </div>
       <div class="checkout__order--description">
@@ -66,59 +66,32 @@
           account, and for other purposes described in our privacy policy.
         </p>
       </div>
-      <input type="button" class="checkout__order--btn" value="Place order" />
+      <input type="submit" class="checkout__order--btn" value="Place order" />
     </div>
-  </div>
+  </form>
 </template>
 
 <script>
-import { LIST_OF_COUNTRIES } from '@/constants';
 import { mapActions, mapGetters } from 'vuex';
 
 export default {
   name: 'CheckoutPage',
 
   computed: {
-    ...mapGetters(['productsInCart', 'products']),
-
-    getTotal() {
-      let total = 0;
-      this.mergedArray.forEach((p) => (total += p.price * p.quantity));
-      console.log(total);
-      return total;
-    },
-
-    mergedArray() {
-      const filteredArray = this.filterArray(this.products);
-
-      const mergedArray = this.productsInCart.map((item) => ({
-        productId: item.productId,
-        quantity: item.quantity,
-        price: filteredArray.find((product) => product.id === item.productId)?.price,
-        name: filteredArray.find((product) => product.id === item.productId)?.name
-      }));
-      console.log(mergedArray);
-      return mergedArray;
-    }
+    ...mapGetters(['productsInCart', 'products', 'countries', 'totalPriceInCart'])
   },
 
   methods: {
-    ...mapActions(['fetchProducts']),
+    ...mapActions(['fetchProducts', 'fetchCountries']),
 
-    LIST_OF_COUNTRIES() {
-      return LIST_OF_COUNTRIES;
-    },
-
-    filterArray(array) {
-      return array.map((item) => {
-        const { id, price, name } = item;
-        return { id, price, name };
-      });
+    sendingData() {
+      console.log('data sent');
     }
   },
 
   mounted() {
     this.fetchProducts();
+    this.fetchCountries();
   }
 };
 </script>

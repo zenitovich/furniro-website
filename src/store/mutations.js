@@ -7,6 +7,10 @@ export const mutations = {
     state.product = product;
   },
 
+  SET_COUNTRIES(state, countries) {
+    state.countries = countries;
+  },
+
   initialiseStore(state) {
     if (localStorage.getItem('store')) {
       this.replaceState(Object.assign(state, JSON.parse(localStorage.getItem('store'))));

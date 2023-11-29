@@ -1,11 +1,11 @@
 <template>
   <div class="card-in-cart">
-    <img :src="productData.image" class="card-in-cart__img" />
-    <span class="card-in-cart__text">{{ productData.name }}</span>
-    <span class="card-in-cart__text">Rs {{ productData.price }},000</span>
+    <img :src="image" class="card-in-cart__img" />
+    <span class="card-in-cart__text">{{ name }}</span>
+    <span class="card-in-cart__text">Rs {{ price }},000</span>
     <span class="card-in-cart__quantity">{{ quantity }}</span>
-    <span class="card-in-cart__total">Rs {{ productData.price * quantity }},000</span>
-    <img src="../../assets/icons/remove-from-cart.svg" class="card-in-cart__icon" @click="setCart(inCart)" />
+    <span class="card-in-cart__total">Rs {{ price * quantity }},000</span>
+    <input type="button" class="card-in-cart__btn" @click="setCart()" />
   </div>
 </template>
 
@@ -15,33 +15,49 @@ import { mapGetters, mapMutations } from 'vuex';
 export default {
   name: 'CardInCart',
 
-  computed: {
-    ...mapGetters(['productsInCart']),
-
-    inCart(vm) {
-      let result = vm.productsInCart.map((item) => item.productId);
-      return result.includes(vm.productData.id);
+  props: {
+    id: {
+      type: Number
     },
 
-    quantity() {
-      return this.productsInCart.filter((product) => product.productId === this.productData.id)[0].quantity;
+    image: {
+      type: String,
+      default() {
+        return '';
+      }
+    },
+
+    name: {
+      type: String,
+      default() {
+        return 'defaultName';
+      }
+    },
+
+    price: {
+      type: Number,
+      default() {
+        return 0;
+      }
+    },
+
+    quantity: {
+      type: Number,
+      default() {
+        return 0;
+      }
     }
+  },
+
+  computed: {
+    ...mapGetters(['productsInCart'])
   },
 
   methods: {
     ...mapMutations(['setProductsInCart']),
 
-    setCart(inCart) {
-      this.setProductsInCart([this.productData.id, !inCart, 1]);
-    }
-  },
-
-  props: {
-    productData: {
-      type: Object,
-      default() {
-        return {};
-      }
+    setCart() {
+      this.setProductsInCart([this.id, false, 1]);
     }
   }
 };
