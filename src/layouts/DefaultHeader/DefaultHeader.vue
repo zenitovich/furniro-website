@@ -2,7 +2,7 @@
   <header class="header-component">
     <div class="header">
       <div class="header__logo">
-        <img src="../assets/icons/logo.svg" alt="logo" />
+        <img src="../../assets/icons/logo.svg" alt="logo" />
       </div>
       <div class="header__list">
         <a v-for="link in arrayOfLinks" :key="link" class="header__list--item" @click="$router.push(`../${link}`)">{{
@@ -12,7 +12,7 @@
       <div class="header__icons">
         <!--                  <div class="header__icons&#45;&#45;item"><img src="../assets/icons/profile.svg" alt="profile"/></div>-->
         <div v-if="disableSearchInput" class="header__icons--item">
-          <img src="../assets/icons/search.svg" alt="search" @click="disableSearchInput = false" />
+          <img src="../../assets/icons/search.svg" alt="search" @click="disableSearchInput = false" />
         </div>
         <div v-else class="header__icons--item">
           <input v-model="nameOfPage" type="text" placeholder="home" @keydown.enter="selectPage" />
@@ -23,7 +23,7 @@
             {{ productsInCart.length }}
           </div>
           <a @click="$router.push('/cart')">
-            <img src="../assets/icons/cart.svg" alt="cart" />
+            <img src="../../assets/icons/cart.svg" alt="cart" />
           </a>
         </div>
       </div>
@@ -66,5 +66,5 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import 'default-layout.scss';
+@import 'DefaultHeader';
 </style>

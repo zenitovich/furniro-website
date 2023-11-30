@@ -1,0 +1,75 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins');
+
+.header-component {
+  overflow: hidden;
+}
+
+.header {
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 12.5px 5%;
+
+  &__list {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: Poppins;
+    font-size: 16px;
+    font-weight: bold;
+    color: rgba(0, 0, 0, 1);
+
+    :last-child {
+      padding-right: 0;
+    }
+
+    &--item {
+      padding-right: 40px;
+      cursor: pointer;
+      text-decoration: none;
+      color: black;
+    }
+  }
+
+  &__icons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    :last-child {
+      padding-right: 0;
+    }
+
+    &--item {
+      padding-right: 80px;
+      cursor: pointer;
+      position: relative;
+
+      &-cart {
+        font-family: Poppins;
+        padding: 2px 12px;
+        background-color: bisque;
+        color: black;
+        position: absolute;
+        left: 20px;
+        bottom: 20px;
+        border-radius: 50%;
+      }
+    }
+  }
+}
+.header-background-image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 122px 0;
+  width: 100%;
+  font-size: 48px;
+  font-weight: 500;
+  font-family: Poppins;
+  background-size: 100%;
+  background: url("../../assets/images/header-background-image.png") center center no-repeat;
+  background-size: 100%;
+}
