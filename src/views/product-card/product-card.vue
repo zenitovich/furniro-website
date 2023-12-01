@@ -126,7 +126,6 @@ export default {
     counter(value) {
       if (value === 'plus') {
         this.count++;
-        console.log(this.product);
       } else {
         this.count--;
       }

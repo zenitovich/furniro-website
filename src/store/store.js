@@ -14,7 +14,8 @@ const store = new Vuex.Store({
     products: [],
     likedProducts: [],
     productInCart: [],
-    product: {}
+    product: {},
+    countries: []
   },
 
   mutations: mutations,

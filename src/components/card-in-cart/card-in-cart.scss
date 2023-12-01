@@ -1,0 +1,37 @@
+.card-in-cart {
+  display: grid;
+  grid-template-columns: 100px 125px 100px 25px 125px 25px;
+  align-items: center;
+  justify-items: center;
+  gap: 50px;
+  margin: 50px 0;
+  @media (max-width: 800px) {
+    gap: 5px;
+  }
+
+  &__img {
+    width: 100px;
+    height: 100px;
+    border-radius: 10%;
+  }
+
+  &__text {
+    color: lightgrey;
+  }
+
+  &__quantity {
+    min-width: 25px;
+    min-height: 18px;
+    border: 2px solid lightgrey;
+    border-radius: 5px;
+    text-align: center;
+  }
+
+  &__btn {
+    cursor: pointer;
+    background: url("../../assets/icons/remove-from-cart.svg") center center no-repeat;
+    height: 25px;
+    width: 25px;
+    border: none;
+  }
+}

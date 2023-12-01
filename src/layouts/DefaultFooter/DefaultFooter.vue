@@ -3,7 +3,7 @@
     <div v-if="$route.meta.layout === 'DefaultLayout'" class="footer__advantages">
       <div class="footer__advantages--item">
         <div class="footer__advantages--item-logo">
-          <img src="../assets/icons/quality.svg" />
+          <img src="../../assets/icons/quality.svg" />
         </div>
         <div class="footer__advantages--item-theme">
           High Quality
@@ -12,7 +12,7 @@
       </div>
       <div class="footer__advantages--item">
         <div class="footer__advantages--item-logo">
-          <img src="../assets/icons/protection.svg" />
+          <img src="../../assets/icons/protection.svg" />
         </div>
         <div class="footer__advantages--item-theme">
           Warranty Protection
@@ -21,7 +21,7 @@
       </div>
       <div class="footer__advantages--item">
         <div class="footer__advantages--item-logo">
-          <img src="../assets/icons/shipping.svg" />
+          <img src="../../assets/icons/shipping.svg" />
         </div>
         <div class="footer__advantages--item-theme">
           Free Shipping
@@ -30,7 +30,7 @@
       </div>
       <div class="footer__advantages--item">
         <div class="footer__advantages--item-logo">
-          <img src="../assets/icons/support.svg" />
+          <img src="../../assets/icons/support.svg" />
         </div>
         <div class="footer__advantages--item-theme">
           24/7 Support
@@ -90,5 +90,5 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import 'default-layout.scss';
+@import 'DefaultFooter';
 </style>

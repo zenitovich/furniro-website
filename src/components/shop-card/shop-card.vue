@@ -31,6 +31,15 @@ import { mapGetters, mapMutations } from 'vuex';
 export default {
   name: 'ShopCard',
 
+  props: {
+    productData: {
+      type: Object,
+      default() {
+        return {};
+      }
+    }
+  },
+
   computed: {
     ...mapGetters(['likedProducts', 'productsInCart']),
 
@@ -54,15 +63,6 @@ export default {
     setLike(like) {
       like ? (like = false) : (like = true);
       this.setLikedProducts([this.productData.id, like]);
-    }
-  },
-
-  props: {
-    productData: {
-      type: Object,
-      default() {
-        return {};
-      }
     }
   }
 };
